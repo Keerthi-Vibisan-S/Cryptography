@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Header()
 {
     return(
@@ -5,10 +7,10 @@ export default function Header()
             <h1 className="text-3xl text-glitch">Encrypt and Decrypt</h1>
 
             <div className="flex justify-evenly w-[45%] font-semibold text-xl">
-                <div>Encrypt</div>
-                <div>Decrypt</div>
-                <div>Chat</div>
-                <div>About</div>
+                <Link to={"/"}>Encrypt</Link>
+                <Link to={"/decrypt"}>Decrypt</Link>
+                <Link>Chat</Link>
+                <Link>About</Link>
             </div>
         </section>
     )

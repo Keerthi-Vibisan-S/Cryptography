@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function EncryptAndDecrypt()
+export default function Decrypt()
 {
     const [key, setKey] = useState(false);
 
@@ -9,22 +9,21 @@ export default function EncryptAndDecrypt()
     }
 
     return (
-        <section className="my-dark-bg p-8 min-h-[100vh]">
-            <h1 className="my-light-clr text-4xl text-glitch">Encrypt and Decrypt</h1>
+        <section className="my-dark-bg p-8 pt-4 min-h-[100vh]">
 
-            <div className="flex flex-col mt-8">
+            <div className="flex flex-col">
                 <div className="flex flex-col">
-                    <label htmlFor="encText" className="text-3xl mb-4 my-light-clr"><span>Enter text to </span><span className="text-white font-bold ">Encrypt</span></label>
+                    <label htmlFor="encText" className="text-3xl mb-4 my-light-clr"><span>Enter text to </span><span className="text-white font-bold ">Decrypt</span></label>
                     <textarea rows="8" className="my-mid-bg p-3 text-white" name="encText" id="encText"></textarea>
                 </div>
                 
                 <div className="mt-4 flex justify-center">
                     <input type="checkbox" className="my-mid-bg text-white mr-2 mt-2" name="key" id="key" onChange={() => changeStateKey()}/>
-                    <label htmlFor="key" className="text-2xl mb-4 my-light-clr"><span>Want to <span className="text-white font-bold">Encrypt</span> with your <span className="text-white font-bold">Own Key</span> </span></label>
+                    <label htmlFor="key" className="text-2xl mb-4 my-light-clr"><span>Do you have a <span className="text-white font-bold">Key</span> to <span className="text-white font-bold">Decrypt</span> </span></label>
                 </div>
 
                 {key?<div className="mt-2 flex flex-col">
-                    <label htmlFor="encText" className="text-3xl mb-4 my-light-clr"><span className="text-white font-bold">🗝️Key</span></label>
+                    <label htmlFor="encText" className="text-3xl mb-4 my-light-clr"><span className="text-white font-bold">🗝️Key</span> <span className="text-lg">( * do not share this key )</span></label>
                     <input type="text" className="my-mid-bg p-3 text-white" name="decText" id="decText"/>
                 </div>
                 :
