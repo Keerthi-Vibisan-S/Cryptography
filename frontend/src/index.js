@@ -1,12 +1,13 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 import './App.css';
+import EncryptAndDecrypt from './Components/encAndDec';
 
 function Main()
 {
   return(
     <>
-      <div className='text-red-700 text-3xl font-bold underline'>Hello</div>
+      <EncryptAndDecrypt />
     </>
   );
 }
