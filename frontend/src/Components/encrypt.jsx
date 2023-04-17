@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Axios from 'axios';
 import { encrypt_url } from '../utils/apis';
+import * as ai from 'react-icons/ai';
+import Loading from "./loading";
 
 export default function Encrypt()
 {
@@ -9,10 +11,12 @@ export default function Encrypt()
     const [text, setText] = useState("");
     const [enc, setEnc] = useState(false);
     const [encText, setEncText] = useState("");
+    const [loader, setLoader] = useState(false);
 
     const encrypt = async () => {
         if(text.trim() != "")
         {
+            setLoader(true);
             const data = {
                 text: text,
                 isKey: keyField,
@@ -30,6 +34,10 @@ export default function Encrypt()
                 setEnc(!enc);
                 setEncText(result.data.encrypted);
             }
+            else {
+                //! Error Disply Here
+            }
+            setLoader(false);
         }
         else {
             alert("Enter text to decrypt");
@@ -37,11 +45,18 @@ export default function Encrypt()
     }
 
     return (
-        <section className="my-dark-bg p-8 pt-4 min-h-[100vh]">
+      <>
+         {loader?<Loading />: 
+         <section className="my-dark-bg p-8 pt-4 min-h-[100vh]">
             {enc?
                 <div className="flex flex-col">
                     <div className="flex flex-col">
-                        <label htmlFor="encText" className="text-3xl mb-4 my-light-clr"><span>Your </span><span className="text-white font-bold ">Encrypted</span> text</label>
+                        <label htmlFor="encText" className="text-3xl mb-4 my-light-clr"><span>Your </span><span className="text-white font-bold ">Encrypted</span> text 
+                            <button className="my-brgt-bg font-bold w-fit my-dark-clr ml-4 p-2 text-2xl rounded-md hover:scale-105 hover:bg-white duration-200 text-glitch" onClick={() => navigator.clipboard.writeText(encText)}>
+                                <ai.AiFillCopy />
+                            </button>
+                        </label> 
+
                         <textarea value={encText} rows="8" className="my-mid-bg p-3 text-white" name="encText" id="encText" readOnly={true}></textarea>
                     </div>
                     <button className="my-brgt-bg font-bold w-fit my-dark-clr mt-5 p-2 text-2xl rounded-md hover:scale-105 hover:bg-white duration-200 text-glitch" onClick={() => {setEncText(""); setEnc(!enc)}}>
@@ -73,5 +88,7 @@ export default function Encrypt()
                 </div>
             }
         </section>
+       }
+      </>
     )
 }
