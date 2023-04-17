@@ -12,6 +12,8 @@ app.get("/", (req, res) => {
 const encrypt = require('./routes/encrypt');
 app.use("/encrypt", encrypt);
 
+const decrypt = require('./routes/decrypt');
+app.use("/decrypt", decrypt);
 
 //! Error handler
 const err = require('./error/api-error-handler');
