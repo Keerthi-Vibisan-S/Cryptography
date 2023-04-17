@@ -12,6 +12,11 @@ app.get("/", (req, res) => {
 const encrypt = require('./routes/encrypt');
 app.use("/encrypt", encrypt);
 
+
+//! Error handler
+const err = require('./error/api-error-handler');
+app.use(err);
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
     console.log("Listening on Port ",port);
