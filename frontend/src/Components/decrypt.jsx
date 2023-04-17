@@ -2,11 +2,7 @@ import { useState } from "react"
 
 export default function Decrypt()
 {
-    const [key, setKey] = useState(false);
-
-    const changeStateKey = () => {
-        setKey(!key);
-    }
+    const [keyField, setKeyField] = useState(false);
 
     return (
         <section className="my-dark-bg p-8 pt-4 min-h-[100vh]">
@@ -18,11 +14,11 @@ export default function Decrypt()
                 </div>
                 
                 <div className="mt-4 flex justify-center">
-                    <input type="checkbox" className="my-mid-bg text-white mr-2 mt-2" name="key" id="key" onChange={() => changeStateKey()}/>
+                    <input type="checkbox" className="my-mid-bg text-white mr-2 mt-2" name="key" id="key" onChange={() => setKeyField(!keyField)}/>
                     <label htmlFor="key" className="text-2xl mb-4 my-light-clr"><span>Do you have a <span className="text-white font-bold">Key</span> to <span className="text-white font-bold">Decrypt</span> </span></label>
                 </div>
 
-                {key?<div className="mt-2 flex flex-col">
+                {keyField?<div className="mt-2 flex flex-col">
                     <label htmlFor="encText" className="text-3xl mb-4 my-light-clr"><span className="text-white font-bold">🗝️Key</span> <span className="text-lg">( * do not share this key )</span></label>
                     <input type="text" className="my-mid-bg p-3 text-white" name="decText" id="decText"/>
                 </div>
@@ -30,7 +26,7 @@ export default function Decrypt()
                 ""
                 }
                 <button className="my-brgt-bg font-bold w-fit my-dark-clr mt-5 p-2 text-2xl rounded-md hover:scale-105 hover:bg-white duration-200 text-glitch">
-                    Encrypt
+                    Decrypt
                 </button>
             </div>
         </section>
