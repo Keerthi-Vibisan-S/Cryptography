@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { encrypt_url } from '../utils/apis';
 import * as ai from 'react-icons/ai';
 import Loading from "./loading";
+import ErrToast from "./toast/error";
 
 export default function Encrypt()
 {
@@ -12,6 +13,7 @@ export default function Encrypt()
     const [enc, setEnc] = useState(false);
     const [encText, setEncText] = useState("");
     const [loader, setLoader] = useState(false);
+    const [error, setError] = useState(false);
 
     const encrypt = async () => {
         if(text.trim() != "")
@@ -23,24 +25,26 @@ export default function Encrypt()
                 key: key
 
             }
-            
-            const result = await Axios.post(encrypt_url, data);
+            try{
+                const result = await Axios.post(encrypt_url, data);
 
-            if(result.status == 200)
-            {
                 setText("");
                 setKey("");
                 setKeyField(false);
                 setEnc(!enc);
                 setEncText(result.data.encrypted);
             }
-            else {
-                //! Error Disply Here
+            catch(err) {
+                //console.log(err);
+                setError(true);
+                setTimeout(() => {
+                    setError(false);
+                }, 5000);
             }
             setLoader(false);
         }
         else {
-            alert("Enter text to decrypt");
+            alert("Enter text to encrypt");
         }
     }
 
@@ -48,6 +52,7 @@ export default function Encrypt()
       <>
          {loader?<Loading />: 
          <section className="my-dark-bg p-8 pt-4 min-h-[100vh]">
+            {error?<ErrToast close={setError} />:""}
             {enc?
                 <div className="flex flex-col">
                     <div className="flex flex-col">
