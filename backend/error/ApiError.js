@@ -8,6 +8,10 @@ class ApiError {
         return new ApiError(400, msg);
     }
 
+    static badDecrypt(msg) {
+        return new ApiError(415, msg);
+    }
+    
     static internal(msg) {
         return new ApiError(500, msg);
     }

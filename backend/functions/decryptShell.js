@@ -1,10 +1,10 @@
 const { exec } = require('child_process');
 
-function encryptShell(text, isKey, key) {
+function decryptShell(text, isKey, key) {
     return new Promise((resolve, reject) => {
-      let cmd = `echo "${text}" | openssl enc -e -aes-256-cbc -a -salt -k 123456789987654321 -iv aaabbbccc`;  
+      let cmd = `echo "${text}" | openssl enc -d -aes-256-cbc -a -salt -k 123456789987654321 -iv aaabbbccc`;  
       if(isKey == true) {
-        cmd = `echo "${text}" | openssl enc -e -aes-256-cbc -a -salt -k ${key} -iv aaabbbccc`;
+        cmd = `echo "${text}" | openssl enc -d -aes-256-cbc -a -salt -k ${key} -iv aaabbbccc`;
       }
       // console.log(cmd);
       exec(cmd, (err, stdout, stderr) => {
@@ -19,4 +19,4 @@ function encryptShell(text, isKey, key) {
     })
 }
 
-module.exports = encryptShell;
+module.exports = decryptShell;
