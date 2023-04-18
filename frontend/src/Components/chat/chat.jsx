@@ -1,6 +1,8 @@
 import socketIOClient from "socket.io-client";
 import { server } from '../../utils/apis';
 import { useEffect, useState } from 'react';
+import Modal from "./modal";
+import ChatFormToast from "../toast/chatForm";
 
 const socket = socketIOClient(server);
 
@@ -17,12 +19,24 @@ export default function Chat() {
     }, [socket]);
 
     const joinChat = () => {
-        socket.emit("join-room", {name: name, chatId: chatId});
+        if(name.trim()!="" && chatId.trim()!="") {
+            socket.emit("join-room", {name: name, chatId: chatId});
+            setChatWindow(true);
+            console.log("Setting");
+        }
+        else {
+            setToast(true);
+            setTimeout(() => {
+                setToast(false);
+            }, 5000);
+        }
     }
 
+    const [chatWindow, setChatWindow] = useState(false);
     const [name, setName] = useState("");
     const [chatId, setChatId] = useState("");
     const [msg, setMsg] = useState("");
+    const [toast, setToast] = useState(false);
 
     const sendMsg = () => {
         socket.emit("msg", {chatId: chatId, msg: msg});
@@ -40,6 +54,8 @@ export default function Chat() {
             </div>
             <input type="text" onChange={(e) => setMsg(e.target.value)}/>
             <button className="bg-white" onClick={() => sendMsg()}>Send msg</button>
+            {chatWindow?<Modal close={setChatWindow} />:""}
+            {toast?<ChatFormToast close={setToast} />:""}
         </section>
     );
 }
