@@ -9,7 +9,7 @@ export default function Header()
             <div className="flex justify-evenly w-[45%] font-semibold text-xl">
                 <Link to={"/"}>Encrypt</Link>
                 <Link to={"/decrypt"}>Decrypt</Link>
-                <Link>Chat</Link>
+                <Link to={"/chat"}>Chat</Link>
                 <Link>About</Link>
             </div>
         </section>
