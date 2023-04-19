@@ -76,8 +76,8 @@ export default function Encrypt()
                     </div>
                     
                     <div className="mt-4 flex justify-center">
-                        <input type="checkbox" className="my-mid-bg text-white mr-2 mt-2" name="key" id="key" onChange={() => setKeyField(!keyField)}/>
-                        <label htmlFor="key" className="text-2xl mb-4 my-light-clr"><span>Want to <span className="text-white font-bold">Encrypt</span> with your <span className="text-white font-bold">Own Key</span> </span></label>
+                        <input type="checkbox" className="my-mid-bg text-white mr-2 mt-2" name="keyc" id="keyc" onChange={() => setKeyField(!keyField)}/>
+                        <label htmlFor="keyc" className="text-2xl mb-4 my-light-clr"><span>Want to <span className="text-white font-bold">Encrypt</span> with your <span className="text-white font-bold">Own Key</span> </span></label>
                     </div>
 
                     {keyField?<div className="mt-2 flex flex-col">

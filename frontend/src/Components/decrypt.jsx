@@ -76,8 +76,8 @@ export default function Decrypt()
                     </div>
                     
                     <div className="mt-4 flex justify-center">
-                        <input type="checkbox" className="my-mid-bg text-white mr-2 mt-2" name="key" id="key" onChange={() => setKeyField(!keyField)}/>
-                        <label htmlFor="key" className="text-2xl mb-4 my-light-clr"><span>Do you have a key to</span> <span className="text-white font-bold">Decrypt</span></label>
+                        <input type="checkbox" className="my-mid-bg text-white mr-2 mt-2" name="keyc" id="keyc" onChange={() => setKeyField(!keyField)}/>
+                        <label htmlFor="keyc" className="text-2xl mb-4 my-light-clr"><span>Do you have a key to</span> <span className="text-white font-bold">Decrypt</span></label>
                     </div>
 
                     {keyField?<div className="mt-2 flex flex-col">
