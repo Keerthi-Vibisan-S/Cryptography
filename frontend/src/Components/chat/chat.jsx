@@ -11,11 +11,6 @@ export default function Chat() {
         socket.on("connect", () => {
             console.log("Connected to socket server!");
         });
-
-        socket.on("rec-msg", (data) => {
-            alert(data.msg);
-            // console.log("Connected to socket server!");
-        });
     }, [socket]);
 
     const joinChat = () => {
@@ -52,9 +47,7 @@ export default function Chat() {
                     Start
                 </button>
             </div>
-            <input type="text" onChange={(e) => setMsg(e.target.value)}/>
-            <button className="bg-white" onClick={() => sendMsg()}>Send msg</button>
-            {chatWindow?<Modal close={setChatWindow} />:""}
+            {chatWindow?<Modal close={setChatWindow} name={name} chatId={chatId} socket={socket} />:""}
             {toast?<ChatFormToast close={setToast} />:""}
         </section>
     );
