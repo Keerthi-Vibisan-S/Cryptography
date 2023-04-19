@@ -86,7 +86,7 @@ export default function Modal(props)
                         )
                     })}
                 </div>
-                <div className="my-dark-bg p-4 fixed bottom-[-25px] w-[100%] flex justify-between">
+                <div className="my-dark-bg p-4 fixed bottom-[-25px] w-[100%] flex  justify-between">
                     <input type="text" value={myMsg} onChange={(e) => setMsg(e.target.value)} className={`my-mid-bg p-3 text-white ${encrypt?"w-[58%]":"w-[78%]"}`} /> 
                     {encrypt?
                     <div className="flex justify-evenly">
