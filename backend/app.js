@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "http://192.168.168.220:3000",
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });
@@ -35,6 +35,17 @@ app.use(err);
 
 io.on('connection', (socket) => {
     console.log(socket.id);
+
+    // Joining a room, sending broadcast to other users
+    socket.on('join-room', (data) => {
+        socket.join(data.chatId);
+        socket.to(data.chatId).emit('joined-room', data);
+    })
+
+    //Room communication
+    socket.on("msg", (data) => {
+        socket.to(data.chatId).emit('rec-msg', data);
+    })
 })
 
 
