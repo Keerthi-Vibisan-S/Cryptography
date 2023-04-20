@@ -7,6 +7,7 @@ import Header from './Components/header';
 import Decrypt from './Components/decrypt';
 import Chat from './Components/chat/chat';
 import SideBar from './Components/sidebar';
+import About from './Components/about';
 
 function Main()
 {
@@ -20,6 +21,7 @@ function Main()
           <Route path='/' element={<Encrypt />} />
           <Route path='/decrypt' element={<Decrypt />} />
           <Route path='/chat' element={<Chat />} />
+          <Route path='/about' element={<About />} />
         </Routes>
         </section>
       </Router>
