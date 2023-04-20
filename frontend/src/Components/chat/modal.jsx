@@ -15,6 +15,7 @@ export default function Modal(props)
     const [encrypt, setEncrypt] = useState(false);
     const [key, setKey] = useState("");
     const [toast, setToast] = useState(false);
+    const [roomCount, setRoomCount] = useState(false);
     const msgBkp = useRef("");
  
     useEffect(() => {
@@ -34,9 +35,22 @@ export default function Modal(props)
 
         //! joined-rooms listener
         socket.on("joined-room", (data) => {
-        console.log(data);
-        setChat([...msgBkp.current, {name: data.name, join: true}]);
+        // console.log(data);
+        setChat([...msgBkp.current, {name: data.name, join: true, msg: "Joined"}]);
         });
+        
+        //* Number of listeners 
+        socket.on("room-count", (data) => {
+            // console.log("📼📼📼  ",data);
+            setRoomCount(data);
+        });
+        
+        //! Leaving Room
+        socket.on("leaving-room", (data) => {
+        // console.log(data);
+        setChat([...msgBkp.current, {name: data.name, join: true, msg: "Left"}]);
+        });
+
     }, [socket]);
     
 
@@ -68,7 +82,7 @@ export default function Modal(props)
             setMsg("");
         }
     }
-
+    
     //! Decryption Message
     const decryptMsg = async (index) => {
         if(key.trim() != "")
@@ -92,6 +106,10 @@ export default function Modal(props)
             setEncrypt(true);
         }
     }
+    
+    const leaveRoom = () => {
+        socket.emit("leaving", {name: name, chatId: chatId});
+    };
 
     return(
         <div className={`my-lgt-bg whitespace-pre-wrap z-50 text-white modal fade fixed lg:absolute top-[50%] right-[50%] transform translate-x-[50%] translate-y-[-50%] w-[80%]  h-[100vh] lg:h-[90%] outline-none`}>
@@ -103,8 +121,11 @@ export default function Modal(props)
                         Chat Room
                     </h5>
                     <div className="flex items-center justify-center">
+                        <p>🧑‍🦱 </p>
+                        <p className="my-lgt-bg p-1 px-3 mr-3 rounded-sm">{roomCount}</p>
+                        
                         <p className="mr-4"><span className="font-bold">Room Id:</span> {chatId}</p>
-                        <ai.AiFillCloseCircle size={34} className="text-red-600 cursor-pointer hover:scale-110" onClick={() => {close(false); document.body.style.overflowY="scroll";}}/>
+                        <ai.AiFillCloseCircle size={34} className="text-red-600 cursor-pointer hover:scale-110" onClick={() => {close(false); document.body.style.overflowY="scroll"; leaveRoom();}}/>
                     </div>
                 </div>
                 <div className="p-4 h-[73vh]">
@@ -114,7 +135,7 @@ export default function Modal(props)
                             <div key={key} className={`group mt-2 w-[100%] my-lgt-bg flex ${item.name==name?"justify-start":"justify-end"}`}>
                                {item.join?
                                <div className="w-[100%] text-center p-2">
-                                    {item.name} Joined the chat
+                                    {item.name} {item.msg} the chat
                                 </div>
                                :
                                 <div className={`${item.encrypt?"bg-black text-white":"bg-white"} w-fit p-2 text-black rounded-md hover:scale-105`}>
