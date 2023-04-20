@@ -40,11 +40,12 @@ io.on('connection', (socket) => {
     socket.on('join-room', (data) => {
         socket.join(data.chatId);
         socket.to(data.chatId).emit('joined-room', data);
+        socket.to(data.chatId).emit('room-count', io.sockets.adapter.rooms.get(data.chatId).size);
     })
 
     //Room communication
     socket.on("msg", (data) => {
-        socket.to(data.chatId).emit('rec-msg', data);
+        socket.to(data.chatId).emit('receive-msg', data);
     })
 })
 
