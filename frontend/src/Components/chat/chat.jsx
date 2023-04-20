@@ -46,7 +46,7 @@ export default function Chat() {
                 <button className="my-brgt-bg font-bold w-fit my-dark-clr mt-5 p-2 text-2xl rounded-md hover:scale-105 hover:bg-white duration-200 text-glitch" onClick={() => joinChat()}>
                     Start
                 </button>
-            <h1 className="text-3xl text-white text-left mt-6">1. We have <span className="my-light-clr font-semibold">🔐 Secure Mode</span> of Chat, so people with same assymentric key alone can read your messages.</h1>
+            <h1 className="text-3xl text-white text-left w-[100%] mt-6">1. We have <span className="my-light-clr font-semibold">🔐 Secure Mode</span> of Chat, so people with same assymentric key alone can read your messages.</h1>
             <h1 className="w-[100%] text-3xl text-white text-left mt-6">2. We don't <span className="my-light-clr font-semibold">save or tack your chat.</span></h1>
             <h1 className="w-[100%] text-3xl text-white text-left mt-6">3. Chat as <span className="my-light-clr font-semibold">😶 Anonymous.</span></h1>
             </div>

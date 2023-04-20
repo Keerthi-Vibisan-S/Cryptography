@@ -29,7 +29,13 @@ export default function Modal(props)
     useEffect(() => {
         socket.on("receive-msg", (data) => {
         //console.log(data);
-        setChat([...msgBkp.current, {name: data.name, msg: data.msg, encrypt: data.encrypt}]);
+        setChat([...msgBkp.current, {name: data.name, msg: data.msg, encrypt: data.encrypt, join: false}]);
+        });
+
+        //! joined-rooms listener
+        socket.on("joined-room", (data) => {
+        console.log(data);
+        setChat([...msgBkp.current, {name: data.name, join: true}]);
         });
     }, [socket]);
     
@@ -41,8 +47,8 @@ export default function Modal(props)
                     try {
                         let enc_msg = await encryptMessage({text: myMsg, isKey: true, key: key});
                         // console.log("🔑🔑🔑 ", enc_msg);
-                        setChat([...chat, {name: name, msg: enc_msg, encrypt: true}]);
-                        socket.emit("msg", {name: name, chatId: chatId, msg: enc_msg, encrypt: true});
+                        setChat([...chat, {name: name, msg: enc_msg, encrypt: true, join: false}]);
+                        socket.emit("msg", {name: name, chatId: chatId, msg: enc_msg, encrypt: true, join: false});
                     }
                     catch(err) {
                         //! handle error here
@@ -56,8 +62,8 @@ export default function Modal(props)
                 else { alert("Encryption mode requires a key"); return;}
             }
             else {
-                setChat([...chat, {name: name, msg: myMsg, encrypt: false}]);
-                socket.emit("msg", {name: name, chatId: chatId, msg: myMsg, encrypt: false});
+                setChat([...chat, {name: name, msg: myMsg, encrypt: false, join: false}]);
+                socket.emit("msg", {name: name, chatId: chatId, msg: myMsg, encrypt: false, join: false});
             }
             setMsg("");
         }
@@ -106,11 +112,16 @@ export default function Modal(props)
                     {chat.map((item, key) => {
                         return(
                             <div key={key} className={`group mt-2 w-[100%] my-lgt-bg flex ${item.name==name?"justify-start":"justify-end"}`}>
-                                <div className={`${item.encrypt?"bg-black text-white":"bg-white"} w-fit p-2 text-black rounded-md hover:scale-105`}>
-                                    <p className="text-sm text-slate-400">~ {item.name}</p>
-                                    <p>{item.msg}</p>
-                                    {item.encrypt?<button onClick={() => decryptMsg(key)} className="cursor-pointer bg-yellow-400 w-fit px-4 text-black mt-2 rounded-sm">📥 Decrypt</button>:""}
+                               {item.join?
+                               <div className="w-[100%] text-center p-2">
+                                    {item.name} Joined the chat
                                 </div>
+                               :
+                                <div className={`${item.encrypt?"bg-black text-white":"bg-white"} w-fit p-2 text-black rounded-md hover:scale-105`}>
+                                <p className="text-sm text-slate-400">~ {item.name}</p>
+                                <p>{item.msg}</p>
+                                {item.encrypt?<button onClick={() => decryptMsg(key)} className="cursor-pointer bg-yellow-400 w-fit px-4 text-black mt-2 rounded-sm">📥 Decrypt</button>:""}
+                            </div>}
                             </div>
                         )
                     })}
