@@ -7,7 +7,7 @@ export default function encryptMessage(data)
         try{
             console.log(data);
             const result = await Axios.post(encrypt_url, data);
-            console.log("REsult: ", result);
+            // console.log("REsult: ", result);
             resolve(result.data.encrypted);
         }
         catch(err) {

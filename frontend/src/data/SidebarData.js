@@ -6,24 +6,24 @@ import * as ai from 'react-icons/ai';
 const sidebarData = [
     {
         name: "Encrypt",
-        icon: <bi.BiHomeAlt size={24} />,
+        icon: <ai.AiFillLock size={24} />,
         link: "/"
     },
     {
         name: "Decrypt",
-        icon: <bi.BiBookAdd size={24} />,
+        icon: <ai.AiFillUnlock size={24} />,
         link: "/decrypt"
     },
 
     {
         name: "Chat",
-        icon: <ai.AiOutlineCalendar size={24} />,
+        icon: <ai.AiOutlineWechat size={24} />,
         link: "/chat"
     },
 
     {
         name: "About",
-        icon: <fa.FaHandshake size={24} />,
+        icon: <ai.AiOutlineQuestionCircle size={24} />,
         link: "/about"
     }
 ];
