@@ -8,6 +8,7 @@ import Decrypt from './Components/decrypt';
 import Chat from './Components/chat/chat';
 import SideBar from './Components/sidebar';
 import About from './Components/about';
+import Footer from './Components/footer';
 
 function Main()
 {
@@ -24,6 +25,7 @@ function Main()
           <Route path='/about' element={<About />} />
         </Routes>
         </section>
+        <Footer />
       </Router>
     </section>
   );
