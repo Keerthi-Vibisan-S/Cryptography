@@ -47,6 +47,11 @@ io.on('connection', (socket) => {
     socket.on("msg", (data) => {
         socket.to(data.chatId).emit('receive-msg', data);
     })
+
+    // Leaving Room
+    socket.on('leaving', (data) => {
+        socket.to(data.chatId).emit("leaving-room", data);
+    })
 })
 
 
