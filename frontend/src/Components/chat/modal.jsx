@@ -5,6 +5,7 @@ import * as md from 'react-icons/md';
 import Axios from 'axios';
 import encryptMessage from "./encryptMessage";
 import decryptMessage from "./decryptMessage";
+import ErrToast from "../toast/error";
 
 export default function Modal(props) 
 {
@@ -68,7 +69,7 @@ export default function Modal(props)
         {
             try {
                 chat[index].msg = await decryptMessage({text: chat[index].msg, isKey: true, key: key});
-                // console.log("🌱🌱🌱🌱🌱", res);
+                chat[index].encrypt = false;
                 setChat([...chat]);
             }
             catch(err) {
@@ -88,6 +89,7 @@ export default function Modal(props)
 
     return(
         <div className={`my-lgt-bg whitespace-pre-wrap z-50 text-white modal fade fixed lg:absolute top-[50%] right-[50%] transform translate-x-[50%] translate-y-[-50%] w-[80%]  h-[100vh] lg:h-[90%] outline-none`}>
+        {toast?<ErrToast close={setToast} />:""}
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable w-auto pointer-events-none">
             <div className="modal-content border-none relative flex flex-col w-full pointer-events-auto bg-clip-padding rounded-md outline-none text-current overflow-y-scroll">
                 <div className="my-dark-bg modal-header sticky top-[-1px] z-10  flex flex-shrink-0 items-center justify-between p-4 shadow-lg">
