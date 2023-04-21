@@ -112,7 +112,7 @@ export default function Modal(props)
     };
 
     return(
-        <div className={`my-lgt-bg whitespace-pre-wrap z-50 text-white modal fade fixed lg:absolute top-[50%] right-[50%] transform translate-x-[50%] translate-y-[-50%] w-[80%]  h-[100vh] lg:h-[90%] outline-none`}>
+        <div className={`my-lgt-bg whitespace-pre-wrap z-50 text-white modal fade fixed lg:absolute top-[50%] right-[50%] transform translate-x-[50%] translate-y-[-50%] w-[100%] lg:w-[80%]  h-[95vh] lg:h-[90%] outline-none`}>
         {toast?<ErrToast close={setToast} />:""}
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable w-auto pointer-events-none">
             <div className="modal-content border-none relative flex flex-col w-full pointer-events-auto bg-clip-padding rounded-md outline-none text-current overflow-y-scroll">
@@ -128,7 +128,7 @@ export default function Modal(props)
                         <ai.AiFillCloseCircle size={34} className="text-red-600 cursor-pointer hover:scale-110" onClick={() => {close(false); document.body.style.overflowY="scroll"; leaveRoom();}}/>
                     </div>
                 </div>
-                <div className="p-4 h-[73vh]">
+                <div className="p-4 h-[70vh]">
                     {console.log("chat: ", chat)}
                     {chat.map((item, key) => {
                         return(
@@ -147,23 +147,27 @@ export default function Modal(props)
                         )
                     })}
                 </div>
-                <div className="my-dark-bg p-4 fixed bottom-[-25px] w-[100%] flex  justify-between">
-                    <input type="text" value={myMsg} onChange={(e) => setMsg(e.target.value)} className={`my-mid-bg p-3 text-white ${encrypt?"w-[58%]":"w-[78%]"}`} /> 
-                    {encrypt?
-                    <div className="flex justify-evenly">
-                        <input value={key} onChange={(e) => setKey(e.target.value)} type="text" className="my-lgt-bg mx-2 rounded-md p-3" placeholder="Enter your key" id="key" name="key" />
-                        <button className="bg-green-500 font-bold w-fit my-dark-clr p-2 px-4 rounded-md hover:scale-105 hover:bg-white duration-200 flex items-center" onClick={() => setEncrypt(false)}>
-                            <md.MdEnhancedEncryption size={26} /> <span className="ml-1">Secure</span>
+                <div className="my-dark-bg p-4 fixed bottom-[-20px] md:bottom-[-25px] w-[100%] flex  justify-between h-[18vh] md:h-auto flex-col md:flex-row">
+                    <div className={`flex justify-between w-[100%] ${encrypt?"md:w-[70%]":"md:w-[85%]"}`}>
+                        <input type="text" value={myMsg} onChange={(e) => setMsg(e.target.value)} className={`my-mid-bg p-3 text-white w-[83%] md:w-full`} /> 
+                        <button className="my-brgt-bg font-bold w-fit my-dark-clr p-2 px-4 text-2xl rounded-md hover:scale-105 hover:bg-white duration-200 text-glitch" onClick={() => sendMsg()}>
+                            <bs.BsFillSendFill />
                         </button>
                     </div>
-                    :
-                    <button className="bg-yellow-500 font-bold w-fit my-dark-clr p-2 px-4 rounded-md hover:scale-105 hover:bg-white duration-200 flex items-center" onClick={() => setEncrypt(true)}>
-                        <md.MdNoEncryptionGmailerrorred size={26} /> <span className="ml-1">Default</span>
-                    </button>
-                    }
-                    <button className="my-brgt-bg font-bold w-fit my-dark-clr p-2 px-4 text-2xl rounded-md hover:scale-105 hover:bg-white duration-200 text-glitch" onClick={() => sendMsg()}>
-                        <bs.BsFillSendFill />
-                    </button>
+                   <div>
+                    {encrypt?
+                        <div className="flex justify-evenly">
+                            <input value={key} onChange={(e) => setKey(e.target.value)} type="text" className="my-lgt-bg w-[100%] mx-2 rounded-md p-3" placeholder="Enter your key" id="key" name="key" />
+                            <button className="bg-green-500 font-bold w-fit my-dark-clr p-2 px-4 rounded-md hover:scale-105 hover:bg-white duration-200 flex items-center" onClick={() => setEncrypt(false)}>
+                                <md.MdEnhancedEncryption size={26} /> <span className="ml-1 hidden md:block">Secure</span>
+                            </button>
+                        </div>
+                        :
+                        <button className="bg-yellow-500 font-bold w-fit mx-1 my-dark-clr p-2 px-4 rounded-md hover:scale-105 hover:bg-white duration-200 flex items-center float-right md:float-none" onClick={() => setEncrypt(true)}>
+                            <md.MdNoEncryptionGmailerrorred size={26} /> <span className="ml-1">Default</span>
+                        </button>
+                        }
+                   </div>
                 </div>
             </div>
         </div>
