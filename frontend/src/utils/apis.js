@@ -1,5 +1,6 @@
 // export const server ="http://localhost:3001";
-export const server ="http://192.168.140.131:3001";
+// export const server ="http://192.168.140.131:3001";
+export const server ="https://cryptoback.onrender.com";
 
 export const imgPath = `${window.location.protocol}//${window.location.host}/images/`;
 
