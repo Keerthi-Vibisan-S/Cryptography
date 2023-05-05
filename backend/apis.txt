@@ -1,8 +1,0 @@
-/encrypt
-1. /encrypt/data ---> POST
-   Format:
-   {
-     text: text,
-     isKey: keyField,
-     key: key
-   }
