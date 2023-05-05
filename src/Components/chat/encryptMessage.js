@@ -5,13 +5,13 @@ export default function encryptMessage(data)
 {
     return new Promise((async (resolve, reject) => {      
         try{
-            console.log(data);
+            //console.log(data);
             const result = await Axios.post(encrypt_url, data);
-            // console.log("REsult: ", result);
+            // //console.log("REsult: ", result);
             resolve(result.data.encrypted);
         }
         catch(err) {
-            console.log(err);
+            //console.log(err);
             reject(err);
         }
     }))

@@ -9,7 +9,7 @@ const socket = socketIOClient(server);
 export default function Chat() {
     useEffect(() => {
         socket.on("connect", () => {
-            console.log("Connected to socket server!");
+            //console.log("Connected to socket server!");
         });
     }, [socket]);
 
@@ -17,7 +17,7 @@ export default function Chat() {
         if(name.trim()!="" && chatId.trim()!="") {
             socket.emit("join-room", {name: name, chatId: chatId});
             setChatWindow(true);
-            console.log("Setting");
+            //console.log("Setting");
         }
         else {
             setToast(true);

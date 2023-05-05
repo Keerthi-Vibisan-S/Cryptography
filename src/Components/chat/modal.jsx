@@ -35,19 +35,19 @@ export default function Modal(props)
 
         //! joined-rooms listener
         socket.on("joined-room", (data) => {
-        // console.log(data);
+        // //console.log(data);
         setChat([...msgBkp.current, {name: data.name, join: true, msg: "Joined"}]);
         });
         
         //* Number of listeners 
         socket.on("room-count", (data) => {
-            // console.log("📼📼📼  ",data);
+            // //console.log("📼📼📼  ",data);
             setRoomCount(data);
         });
         
         //! Leaving Room
         socket.on("leaving-room", (data) => {
-        // console.log(data);
+        // //console.log(data);
         setChat([...msgBkp.current, {name: data.name, join: true, msg: "Left"}]);
         });
 
@@ -60,7 +60,7 @@ export default function Modal(props)
                 if(key.trim() != "") {
                     try {
                         let enc_msg = await encryptMessage({text: myMsg, isKey: true, key: key});
-                        // console.log("🔑🔑🔑 ", enc_msg);
+                        // //console.log("🔑🔑🔑 ", enc_msg);
                         setChat([...chat, {name: name, msg: enc_msg, encrypt: true, join: false}]);
                         socket.emit("msg", {name: name, chatId: chatId, msg: enc_msg, encrypt: true, join: false});
                     }
@@ -129,7 +129,7 @@ export default function Modal(props)
                     </div>
                 </div>
                 <div className="p-4 h-[70vh]">
-                    {console.log("chat: ", chat)}
+                    
                     {chat.map((item, key) => {
                         return(
                             <div key={key} className={`group mt-2 w-[100%] my-lgt-bg flex ${item.name==name?"justify-start":"justify-end"}`}>
